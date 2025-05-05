@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYCLONE SMP - Ranks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Background GIF */
+        body {
+            background: url('https://assets.onecompiler.app/43am9xxy6/43dbcyztw/39c9cde746d5d5f3f3e22469c8dc53c2.gif') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+
+        /* Navbar Styling */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease-in-out;
+        }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -3px;
+            width: 0%;
+            height: 2px;
+            background-color: white;
+            transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+        }
+        .nav-link:hover {
+            color: #ffcc00;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0%;
+        }
+
+        /* Rank Card Styling */
+        .rank-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease-in-out;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 6px 20px rgba(255, 223, 0, 0.2);
+        }
+        .rank-card:hover {
+            transform: scale(1.05);
+            border-color: #ffcc00;
+            box-shadow: 0 8px 30px rgba(255, 223, 0, 0.4);
+        }
+
+        /* Rank Image */
+        .rank-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 16px;
+            border: 4px solid #ffcc00;
+        }
+
+        /* Buy Button Animation */
+        .buy-btn {
+            display: inline-block;
+            margin-top: 14px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            color: white;
+            font-weight: bold;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 12px rgba(255, 165, 0, 0.4);
+        }
+        .buy-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(255, 165, 0, 0.5);
+        }
+        .buy-btn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-teal-900 p-4 shadow-lg">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-white">CYCLONE SMP</a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="nav-link">Home</a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+                ☰
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-teal-800 p-4">
+            <a href="index.html" class="block py-2 nav-link">Home</a>
+        </div>
+    </nav>
+
+    <!-- Ranks Section -->
+    <section class="text-center p-6 min-h-screen flex flex-col items-center">
+        <h1 class="text-4xl font-bold text-yellow-400 uppercase tracking-wide">Choose Your Rank</h1>
+        <p class="mt-2 text-gray-300">Upgrade your experience with exclusive perks!</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-6 max-w-7xl mx-auto">
+            
+            <!-- Rank 1 -->
+            <div class="rank-card">
+                <img src="images/knight.jpg" alt="KNIGHT Rank" class="rank-image mx-auto">
+                <h2 class="text-2xl font-bold text-yellow-300">KNIGHT Rank (RS.149)</h2>
+                <p class="mt-2 text-gray-300">✔ Special kit <br>✔ Able to set 3 Homes <br>✔ 4k claim blocks <br>✔ 1 Million $ <br>✔ 2 cmd Powers</p>
+                <a href="https://discord.gg/GrPS4X688H" class="buy-btn" target="_blank">Buy Now</a>
+            </div>
+
+            <!-- Rank 2 -->
+            <div class="rank-card">
+                <img src="images/king.jpg" alt="KING Rank" class="rank-image mx-auto">
+                <h2 class="text-2xl font-bold text-yellow-300">KING RANK (RS.299)</h2>
+                <p class="mt-2 text-gray-300">✔ Special kit <br>✔ Able to set 5 Homes <br>✔ 30k claim blocks <br>✔ 3 Million $ <br>✔ 4 cmd Powers</p>
+                <a href="https://discord.gg/GrPS4X688H" class="buy-btn" target="_blank">Buy Now</a>
+            </div>
+
+            <!-- Rank 3 -->
+            <div class="rank-card">
+                <img src="images/ranger.jpg" alt="RANGER Rank" class="rank-image mx-auto">
+                <h2 class="text-2xl font-bold text-yellow-300">RANGER RANK (RS.399)</h2>
+                <p class="mt-2 text-gray-300">✔ Special kit <br>✔ Able to set 8 Homes <br>✔ 80k claim blocks <br>✔ 6 Million $ <br>✔  general Powers</p>
+                <a href="https://discord.gg/GrPS4X688H" class="buy-btn" target="_blank">Buy Now</a>
+            </div>
+
+            <!-- Rank 4 -->
+            <div class="rank-card">
+                <img src="images/invoker.jpg" alt="INVOKER Rank" class="rank-image mx-auto">
+                <h2 class="text-2xl font-bold text-yellow-300">INVOKER RANK (RS.499)</h2>
+                <p class="mt-2 text-gray-300">✔ Special kit <br>✔ Able to set 15 Homes <br>✔ 5M claim blocks <br>✔ 18 Million $ <br>✔  Many specialability (/fly,/feed)</p>
+                <a href="https://discord.gg/GrPS4X688H" class="buy-btn" target="_blank">Buy Now</a>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!menuBtn.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+            }
+        });
+    </script>
+
+</body>
+</html>
