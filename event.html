@@ -29,7 +29,7 @@
       border-radius: 15px;
       width: 100%;
       max-width: 520px;
-      box-shadow: 0 0 25px rgba(0, 195, 255, 0.6); /* Blue glow */
+      box-shadow: 0 0 25px rgba(0, 195, 255, 0.6);
       position: relative;
     }
 
@@ -37,14 +37,14 @@
       text-align: center;
       color: #00c3ff;
       font-size: 26px;
-      text-shadow: 0 0 10px #00c3ff; /* Blue shadow */
+      text-shadow: 0 0 10px #00c3ff;
     }
     
     h2 {
       text-align: center;
       color: #00ffae;
       font-size: 22px;
-      text-shadow: 0 0 8px #00ffae; /* Green-cyan glow */
+      text-shadow: 0 0 8px #00ffae;
     }
 
     .subtitle {
@@ -76,12 +76,12 @@
 
     input:focus, textarea:focus, select:focus {
       outline: none;
-      box-shadow: 0 0 12px #00c3ff; /* Blue focus glow */
+      box-shadow: 0 0 12px #00c3ff;
       background: rgba(255,255,255,0.15);
     }
     
     select option {
-      color: black; /* dropdown options readable */
+      color: black;
     }
 
     .rewards {
@@ -111,7 +111,7 @@
       margin-top: 10px;
       padding: 14px;
       font-size: 16px;
-      background-color: #00c3ff; /* Blue button */
+      background-color: #00c3ff;
       color: white;
       border: none;
       border-radius: 8px;
@@ -158,7 +158,6 @@
       opacity: 1;
     }
 
-    /* Modal Styles */
     .modal {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -183,7 +182,7 @@
       border-radius: 12px;
       text-align: center;
       max-width: 400px;
-      box-shadow: 0 0 15px #00c3ff; /* Blue glow */
+      box-shadow: 0 0 15px #00c3ff;
     }
 
     .modal-box h3 {
@@ -240,7 +239,7 @@
               <li><strong>1st Rank:</strong> ₹300 Cash (Online Payment)</li>
               <li><strong>2nd Rank:</strong> 100 😎</li>
               <li><strong>3rd Rank:</strong> In game Highest Rank</li>
-              <li><strong>Below all: 100k ingame money</li>
+              <li><strong>Below all:</strong> 100k ingame money</li>
           </ul>
         </div>
         <p>💬 Contact staff if you have any questions!</p>
@@ -256,7 +255,13 @@
         <input type="text" id="username" placeholder="Your Name / Discord Username" required />
         <input type="text" id="ign" placeholder="Minecraft IGN" required />
         <input type="number" id="age" placeholder="Your Age" required />
-        <input type="text" id="smpMember" placeholder="Which SMP member you are?" required />
+
+        <!-- SMP Member Dropdown -->
+        <select id="smpMember" required>
+          <option value="">Select SMP</option>
+          <option value="CYCLONE MC">CYCLONE MC</option>
+          <option value="PARADISE MC">PARADISE MC</option>
+        </select>
 
         <!-- Role Dropdown -->
         <select id="role" required>
@@ -318,7 +323,6 @@
       successModal.classList.remove("active");
     }
 
-    // Show register button only when fully scrolled
     infoScrollBox.addEventListener("scroll", () => {
       if (infoScrollBox.scrollTop + infoScrollBox.clientHeight >= infoScrollBox.scrollHeight - 5) {
         registerBtn.classList.remove("hidden-btn");
