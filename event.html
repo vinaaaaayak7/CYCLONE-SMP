@@ -1,386 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Cyclone SMP Build Event</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cyclone MC — Events</title>
+  <meta name="description" content="No events going on in Cyclone MC" />
+  <!-- Minimal favicon (SVG data URL) -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%2334d399'/%3E%3Ctext x='50' y='57' font-size='42' text-anchor='middle' font-family='Arial' fill='white'%3EC%3C/text%3E%3C/svg%3E">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: url("https://uploads.onecompiler.io/43am9xxy6/43qs85jpx/wp15100910.webp") center/cover no-repeat fixed,
-                  linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-    }
-
-    .container {
-      background-color: rgba(0, 0, 0, 0.7);
-      padding: 30px;
-      border-radius: 15px;
-      width: 100%;
-      max-width: 520px;
-      box-shadow: 0 0 25px rgba(0, 195, 255, 0.6);
-      position: relative;
-    }
-
-    h1 {
-      text-align: center;
-      color: #00c3ff;
-      font-size: 26px;
-      text-shadow: 0 0 10px #00c3ff;
-    }
-    
-    h2 {
-      text-align: center;
-      color: #00ffae;
-      font-size: 22px;
-      text-shadow: 0 0 8px #00ffae;
-    }
-
-    .subtitle {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 14px;
-      color: #ccc;
-    }
-
-    .info-content {
-      font-size: 15px;
-      line-height: 1.6;
-      margin-bottom: 25px;
-      max-height: 250px;
-      overflow-y: auto;
-      padding-right: 5px;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      font-size: 15px;
-      background: rgba(255,255,255,0.08);
-      color: white;
-      transition: 0.3s ease;
-    }
-
-    input:focus, textarea:focus, select:focus {
-      outline: none;
-      box-shadow: 0 0 12px #00c3ff;
-      background: rgba(255,255,255,0.15);
-    }
-    
-    select option {
-      color: black;
-    }
-
-    .rewards {
-      background-color: rgba(255, 255, 255, 0.05);
-      padding: 20px;
-      border-radius: 10px;
-      margin-top: 20px;
-      border-left: 4px solid #00ffae;
-    }
-
-    .rewards h3 {
-      margin-bottom: 10px;
-      color: #00ffae;
-    }
-
-    .rewards ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .rewards li {
-      padding: 8px 0;
-      font-size: 16px;
-    }
-
-    button {
-      margin-top: 10px;
-      padding: 14px;
-      font-size: 16px;
-      background-color: #00c3ff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.2s ease, background 0.3s ease;
-      width: 100%;
-    }
-
-    button:hover {
-      background-color: #009fd1;
-      transform: scale(1.03);
-      box-shadow: 0 0 10px #00c3ff;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .page {
-      display: none;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    .hidden-btn {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.5s ease;
-    }
-
-    .visible-btn {
-      display: block;
-      opacity: 1;
-    }
-
-    .modal {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      visibility: hidden;
-      opacity: 0;
-      transition: 0.3s ease;
-      z-index: 1000;
-    }
-
-    .modal.active {
-      visibility: visible;
-      opacity: 1;
-    }
-
-    .modal-box {
-      background: #1e1e1e;
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      max-width: 400px;
-      box-shadow: 0 0 15px #00c3ff;
-    }
-
-    .modal-box h3 {
-      margin-bottom: 15px;
-      color: #00ffae;
-    }
-
-    .modal-box button {
-      margin-top: 10px;
-      background: #00ffae;
-    }
-
-    @media screen and (max-width: 480px) {
-      .container {
-        padding: 20px;
-      }
-
-      h1 {
-        font-size: 20px;
-      }
-
-      button {
-        font-size: 15px;
-        padding: 12px;
-      }
-    }
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#34d399;--muted:#94a3b8}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#081028 0%,var(--bg) 100%);font-family:Inter,system-ui,Arial, sans-serif;color:#e6eef8}
+    .card{width:min(720px,94%);padding:40px;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03);display:grid;grid-template-columns:120px 1fr;gap:28px;align-items:center}
+    .logo{width:120px;height:120px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:#0b1220;overflow:hidden;}
+    .logo img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+    h1{margin:0;font-size:28px;letter-spacing:-0.3px}
+    p{margin:8px 0 0;color:var(--muted);font-size:15px}
+    .status{margin-top:18px;display:flex;gap:12px;align-items:center}
+    .dot{width:14px;height:14px;border-radius:20px;background:var(--accent);box-shadow:0 0 12px rgba(52,211,153,0.35);animation:pulse 2s infinite}
+    @keyframes pulse{0%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:0.7}100%{transform:scale(1);opacity:1}}
+    .actions{margin-top:22px;display:flex;gap:10px}
+    .btn{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px 14px;border-radius:10px;color:#dbeafe;font-weight:600;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#0ea5a4);color:#022;box-shadow:0 8px 24px rgba(14,165,164,0.18);border:none}
+    .muted-small{font-size:13px;color:rgba(230,238,248,0.6)}
+    @media (max-width:560px){.card{grid-template-columns:1fr;gap:16px;padding:22px}.logo{justify-self:center}}
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Page 1: Info -->
-    <div id="infoPage" class="page active">
-      <h1>CYCLONE x PARADISE</h1>
-      <h2>🔴 Redstone Build Event</h2>
-      <p class="subtitle"> Proudly Hosted by Cyclone SMP</p>
-      <div class="info-content" id="infoScrollBox">
-        <p>🧱 Unleash your Redstone engineering skills in our exciting SMP Redstone Build Event!</p>
-        <p>🏆 Winner gets an exclusive in-game reward and Discord role.</p>
-        <p>📅 Date: 24th Aug 2025 10 AM to 6 PM</p>
-        <p>⏰ Time Limit: 8 Hours</p>
-        <p>🎨 Theme: Automated Redstone Works</p>
-        <p>📌 Rules:</p>
-        <ul>
-          <li>Solo participation only</li>
-          <li>No external building mods or hacks</li>
-          <li>No copying from tutorials during event</li>
-          <li>Respect staff and other players</li>
-          <li>Creativity and functionality both matter</li>
-          <li>Judges’ decision will be final</li>
-        </ul>
-        <div class="rewards">
-          <h3>🏆 Winner Rewards</h3>
-          <ul>
-              <li><strong>1st Rank:</strong> ₹300 Cash (Online Payment)</li>
-              <li><strong>2nd Rank:</strong> 100 😎</li>
-              <li><strong>3rd Rank:</strong> In game Highest Rank</li>
-              <li><strong>Below all:</strong> 100k ingame money</li>
-          </ul>
+  <main class="card" role="main">
+    <div class="logo" aria-hidden>
+      <img src="https://uploads.onecompiler.io/43am9xxy6/43j6tfhd9/1000004113.jpg" alt="Cyclone MC Logo" />
+    </div>
+
+    <div>
+      <h1>No events going on in Cyclone MC</h1>
+      <p class="muted-small">Filhaal koi event nahi chal raha — dobara check karne ke liye page refresh karein ya update ke liye Discord join karein.</p>
+
+      <div class="status">
+        <div class="dot" aria-hidden></div>
+        <div>
+          <div style="font-weight:700">Status: Quiet</div>
+          <div class="muted-small">There are currently no active events on Cyclone MC.</div>
         </div>
-        <p>💬 Contact staff if you have any questions!</p>
-        <p>Scroll to bottom to unlock registration 👇</p>
       </div>
-      <button id="registerBtn" class="hidden-btn" onclick="showForm()">🚀 Register Now</button>
+
+      <div class="actions">
+        <!-- Open Discord Invite Button -->
+        <button class="btn" onclick="window.open('https://discord.gg/46K3NXhYuf','_blank')">
+          Join Discord
+        </button>
+
+        <!-- Refresh Button -->
+        <button class="btn primary" onclick="location.reload()">Refresh</button>
+      </div>
     </div>
-
-    <!-- Page 2: Form -->
-    <div id="formPage" class="page">
-      <h1>📝 Registration Form</h1>
-      <form id="registrationForm">
-        <input type="text" id="username" placeholder="Your Name / Discord Username" required />
-        <input type="text" id="ign" placeholder="Minecraft IGN" required />
-        <input type="number" id="age" placeholder="Your Age" required />
-
-        <!-- SMP Member Dropdown -->
-        <select id="smpMember" required>
-          <option value="">Select SMP</option>
-          <option value="CYCLONE MC">CYCLONE MC</option>
-          <option value="PARADISE MC">PARADISE MC</option>
-        </select>
-
-        <!-- Role Dropdown -->
-        <select id="role" required>
-          <option value="">Role U have in server</option>
-          <option value="Member">Member</option>
-          <option value="Admin">Admin</option>
-          <option value="Manager">Manager</option>
-          <option value="Staff">Staff</option>
-          <option value="Owner">Owner</option>
-          <option value="Co-owner">Co-owner</option>
-        </select>
-
-        <!-- Country Dropdown -->
-        <select id="country" required>
-          <option value="">Select Country</option>
-          <option value="India">India</option>
-          <option value="BD">BD</option>
-          <option value="PAK">PAK</option>
-          <option value="Other">Other</option>
-        </select>
-
-        <textarea id="reason" placeholder="Any Question about event" rows="4" required></textarea>
-        <button type="submit">✅ Submit</button>
-      </form>
-      <button style="margin-top: 15px;" onclick="showInfo()">← Back to Info</button>
-    </div>
-
-    <p class="footer">Made with ❣️ by Cyclone MC</p>
-  </div>
-
-  <!-- Success Modal -->
-  <div id="successModal" class="modal">
-    <div class="modal-box">
-      <h3>✅ Registration Submitted Successfully!</h3>
-      <p>Your entry has been recorded. Good luck, Redstone Engineer!</p>
-      <button onclick="closeModal()">OK</button>
-    </div>
-  </div>
+  </main>
 
   <script>
-    const webhookURL = "https://discord.com/api/webhooks/1400045976214966333/ZwXwkS88eCuMAjywbYqcd7k3R2jBiHjbIhXEG6Z90_GTwBdZKy5p3aRwY0I0Kf4bi6TO";
-    const infoPage = document.getElementById("infoPage");
-    const formPage = document.getElementById("formPage");
-    const infoScrollBox = document.getElementById("infoScrollBox");
-    const registerBtn = document.getElementById("registerBtn");
-    const successModal = document.getElementById("successModal");
-
-    function showForm() {
-      infoPage.classList.remove("active");
-      formPage.classList.add("active");
-    }
-
-    function showInfo() {
-      formPage.classList.remove("active");
-      infoPage.classList.add("active");
-    }
-
-    function closeModal() {
-      successModal.classList.remove("active");
-    }
-
-    infoScrollBox.addEventListener("scroll", () => {
-      if (infoScrollBox.scrollTop + infoScrollBox.clientHeight >= infoScrollBox.scrollHeight - 5) {
-        registerBtn.classList.remove("hidden-btn");
-        registerBtn.classList.add("visible-btn");
-      }
-    });
-
-    document.getElementById("registrationForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const username = document.getElementById("username").value;
-      const ign = document.getElementById("ign").value;
-      const age = document.getElementById("age").value;
-      const smpMember = document.getElementById("smpMember").value;
-      const role = document.getElementById("role").value;
-      const country = document.getElementById("country").value;
-      const reason = document.getElementById("reason").value;
-
-      const payload = {
-        content: "**New Event Registration!**",
-        embeds: [
-          {
-            title: "🌟 Cyclone SMP Build Event Entry",
-            color: 3447003,
-            fields: [
-              { name: "Username", value: username, inline: true },
-              { name: "Minecraft IGN", value: ign, inline: true },
-              { name: "Age", value: age, inline: true },
-              { name: "SMP Member", value: smpMember, inline: true },
-              { name: "Role", value: role, inline: true },
-              { name: "Country", value: country, inline: true },
-              { name: "Reason", value: reason }
-            ],
-            footer: { text: "Cyclone SMP Registration System" },
-            timestamp: new Date()
-          }
-        ]
-      };
-
-      fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        if (response.ok) {
-          document.getElementById("registrationForm").reset();
-          showInfo();
-          successModal.classList.add("active");
-        } else {
-          alert("❌ Failed to submit. Please try again later.");
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("⚠️ Error submitting the form.");
-      });
-    });
+    // Simple accessibility: focus the refresh button so keyboard users can quickly retry
+    (function(){
+      var btn = document.querySelector('.btn.primary');
+      if(btn) btn.setAttribute('aria-label','Refresh status');
+    })();
   </script>
 </body>
 </html>
